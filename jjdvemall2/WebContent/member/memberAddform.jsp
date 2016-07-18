@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -14,38 +14,35 @@
         width:100%;
     }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$('#addBtn').chlick(function() {
-			if($('#memberId').val == ""){
+	$(document).ready(function(){
+		$('#addBtn').chlick(function(){
+			/* if($('#memberId').val()=="" || $('#memberId').length<4){
 				$('#memberIdhelper').text("아이디를 입력하세요");
-				$('#memberId'). Focus();
-			}else if($('#memberPw').val == ""){
-				$('#memberIdhelper').text("");
-				$('#memberPwhelper').text("비밀번호를 입력하세요");
-				$('#memberPw'). Focus();
-				$('#memberPw'). Focus();
-			}else if($('#memberName').val == ""){
+				$('#memberId').focus();
+			}else if($('#memberPw').val()==""){
+				$("#memberIdhelper").text("");
+				$("#memberPwhelper").text("비밀번호를 입력하세요");
+				$('#memberPw').focus();
+			}else if($('#memberName').val()==""){
 				$('#memberPwhelper').text("");
-				$('#memberNamehelper').text("이름을 입력하세요");
-				$('#memberName'). Focus();
+				$("#memberNamehelper").text("이름을 입력하세요");
+				$('#memberName').focus();
 			}else{
-				$('#memberNamehelper').text("");
-				$('#memberPw'). Focus();
-				$('#addform').submit();
-			}
+				$("#memberNamehelper").text("");
+				
+			} */
+			$('#addform').submit();
 		});
 	});
-
-
 
 </script>
 </head>
 <body>
 <fieldset>
 	<legend>회원가입</legend>
-	<form id="addform" action="./memberAddAction.jsp" method="post"></form>
+<form id="addform" action="<%=request.getContextPath() %>/member/memberAddAction.jsp" method="post"></form>
 	<table>
 	<!-- <tr>
 		<td>number:
@@ -60,7 +57,7 @@
 	</tr>
 	<tr>
 		<td>비밀번호:
-			<input id="memberPw" name="memberPw" type="password" >
+			<input id="memberPw" name="memberPw" type="password">
 			<span id="memberPwhelper"></span>
 		</td>
 	</tr>
@@ -78,12 +75,18 @@
 	</tr>
 	<tr>
 		<td>나이:
-			<input id="memberAge" name="memberAge" type="text" >
+			<input id="memberAge" name="memberAge" type="text">
 			<span id="memberAgehelper"></span>
 		</td>
 	</tr>
 	<tr>
-		<td>Btn
+		<td>주소:
+			<input id="memberAddress" name="memberAddress" type="text">
+			<span id="memberAddresshelper"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<input id="addBtn" type="button" value="입력">
 		</td>
 	</tr>
