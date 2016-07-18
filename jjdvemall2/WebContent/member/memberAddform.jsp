@@ -5,92 +5,86 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<style>
-    table, tr, td {
-        border:1px solid #000000 ;
-        border-collapse:collapse;
-    }
-    table {
-        width:100%;
-    }
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$('#addBtn').chlick(function(){
-			/* if($('#memberId').val()=="" || $('#memberId').length<4){
-				$('#memberIdhelper').text("아이디를 입력하세요");
+		$('#addBtn').click(function(){
+			 if($('#memberId').val()=="" || $('#memberId').val().length<4){
+				$('#Idhelper').text("아이디를 입력하세요");
 				$('#memberId').focus();
 			}else if($('#memberPw').val()==""){
-				$("#memberIdhelper").text("");
-				$("#memberPwhelper").text("비밀번호를 입력하세요");
+				$("#Idhelper").text("");
+				$("#Pwhelper").text("비밀번호를 입력하세요");
 				$('#memberPw').focus();
 			}else if($('#memberName').val()==""){
-				$('#memberPwhelper').text("");
-				$("#memberNamehelper").text("이름을 입력하세요");
+				$('#Pwhelper').text("");
+				$("#Namehelper").text("이름을 입력하세요");
 				$('#memberName').focus();
+			}else if($('.Gender:checked').length == 0){
+				$('#Namehelper').text("");
+				$("#Genhelper").text("성별을 입력하세요");
+				$('.Gender:checked').focus();
+			}else if($('#memberAge').val()==""){
+				$("#Genhelper").text("");
+				$("#Agehelper").text("나이를 입력하세요");
+				$('#memberAge').focus();
+			}else if($('#memberAddress').val()==""){
+				$('#Agehelper').text("");
+				$("#Addhelper").text("주소를 입력하세요");
+				$('#memberAddress').focus();
 			}else{
-				$("#memberNamehelper").text("");
-				
-			} */
-			$('#addform').submit();
+				$("#Addhelper").text("");
+				$('#addform').submit();
+			} 
+			
 		});
 	});
-
 </script>
 </head>
 <body>
-<fieldset>
-	<legend>회원가입</legend>
-<form id="addform" action="<%=request.getContextPath() %>/member/memberAddAction.jsp" method="post"></form>
-	<table>
-	<!-- <tr>
-		<td>number:
+
+	<h1>회원가입</h1>
+<form id="addform" action="<%=request.getContextPath() %>/member/memberAddAction.jsp" method="post">
+	
+	<!-- <div>
+		<label>number:</label>
 			<input id="no" name="no" type="text" >
-		</td>
-	</tr> -->
-	<tr>
-		<td>아이디:
+		
+	<div> -->
+	<div>
+		<label>아이디:</label>
 			<input id="memberId" name="memberId" type="text">
-			<span id="memberIdhelper"></span>
-		</td>
-	</tr>
-	<tr>
-		<td>비밀번호:
+			<span id="Idhelper"></span>	
+	</div>
+	<div>
+		<label>비밀번호:</label>
 			<input id="memberPw" name="memberPw" type="password">
-			<span id="memberPwhelper"></span>
-		</td>
-	</tr>
-	<tr>
-		<td>이름:
+			<span id="Pwhelper"></span>
+	</div>
+	<div>
+		<label>이름:</label>
 			<input id="memberName" name="memberName" type="text" >
-			<span id="memberNamehelper"></span>
-		</td>
-	</tr>
-	<tr>
-		<td>성별:
-		<input id="male" name="memberGender" type="radio" value="male">남
-		<input id="female" name="memberGender" type="radio" value="female">여
-		</td>
-	</tr>
-	<tr>
-		<td>나이:
+			<span id="Namehelper"></span>
+	</div>
+	<div>
+		<label>성별:</label>
+		<input class="Gender"  name="memberGender" type="radio" value="male" >남
+		<input class="Gender"  name="memberGender" type="radio" value="female">여
+		<span id="Genhelper"></span>
+	</div>
+	<div>
+		<label>나이:</label>
 			<input id="memberAge" name="memberAge" type="text">
-			<span id="memberAgehelper"></span>
-		</td>
-	</tr>
-	<tr>
-		<td>주소:
+			<span id="Agehelper"></span>
+	</div>
+	<div>
+		<label>주소:</label>
 			<input id="memberAddress" name="memberAddress" type="text">
-			<span id="memberAddresshelper"></span>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input id="addBtn" type="button" value="입력">
-		</td>
-	</tr>
-</table>
-</fieldset>
+			<span id="Addhelper"></span>
+	</div>
+	<div>
+		<input id="addBtn" type="button" value="입력">
+	</div>
+</form>
 </body>
 </html>

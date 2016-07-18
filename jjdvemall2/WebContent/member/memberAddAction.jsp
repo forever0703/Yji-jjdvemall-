@@ -14,7 +14,8 @@
 	String Pw = request.getParameter("memberPw");
 	String Name = request.getParameter("memberName");
 	String Gender = request.getParameter("memberGender");
-	int Age =Integer.parseInt(request.getParameter("memberAge"));
+	int Age = Integer.parseInt(request.getParameter("memberAge"));
+	/* int Age =Integer.parseInt(request.getParameter("memberAge"));  */
 	String Add = request.getParameter("memberAddress");
 	
 	System.out.println(Id+"<--memberId");
@@ -24,48 +25,54 @@
 	System.out.println(Age+"<--memberAge");
 	System.out.println(Add+"<--memberAddress");
 	
-	Connection conn = null;
+ 	Connection conn = null;
+ 	PreparedStatement memstmt = null;
+ 	PreparedStatement Addstmt = null;
+ 	
+ try{ 
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://127.0.0.1:3306/jjdevmall?useUnicode=true&characterEncoding=utf-8";
+		String dbUser = "root";
+		String dbPw = "java0000";
+		
+		Class.forName(driver);
 	
-	try{
-	String driver = "com.mysql.jdbc.Driver";
-	String url = "jdbc:mysql://127.0.0.1:3306/jjdevmall?useUnicode=true&characterEncoding=utf-8";
-	String dbUser = "root";
-	String dbPw = "java0000";
+		conn = DriverManager.getConnection(url, dbUser, dbPw);
 	
+		conn.setAutoCommit(false);
+		String sql1 = "insert into member( member_id, member_pw,  member_name,  member_gender, member_age) values(?,?,?,?,?)"; 
+		memstmt = conn.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+		memstmt.setString(1,Id);
+		memstmt.setString(2,Pw);
+		memstmt.setString(3,Name);
+		memstmt.setString(4,Gender);
+		memstmt.setInt(5,Age);
+		memstmt.executeUpdate();
 	
-	Class.forName(driver);
-	
-	conn = DriverManager.getConnection(url, dbUser, dbPw);
-	
-	conn.setAutoCommit(false);
-	String sql1 = "insert into member( member_id, member_pw,  member_name,  member_gender, member_age) values(?,?,?,?,?)"; 
-	PreparedStatement stmt1 = conn.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
-	stmt1.setString(1,Id);
-	stmt1.setString(2,Pw);
-	stmt1.setString(3,Name);
-	stmt1.setString(4,Gender);
-	stmt1.setInt(5,Age);
-	stmt1.executeUpdate();
-	
-	int result= stmt1.executeUpdate();
-	if(result != 0){
-		ResultSet rs = stmt1.getGeneratedKeys();
-		int key = 0;
+		ResultSet rs = memstmt.getGeneratedKeys();
+		int lastKey = 0;
 			if(rs.next()){
-			key = rs.getInt(1);
-			System.out.println(key + "key");
-		}
-	String sql2 = "insert into address(member_no,member_address) VALUES(?,?)";
-	PreparedStatement stmt2 = conn.prepareStatement(sql2);
-	stmt2.setInt(1,key);
-	stmt2.setString(2,Add);
-	result = stmt2.executeUpdate();
-	
-	conn.commit();
-	}}catch(Exception e){
-		conn.rollback();
-		e.printStackTrace();
-	}
+				lastKey = rs.getInt(1);
+				
+			}
+			System.out.println(lastKey);
+		String sql2 = "INSERT INTO address(member_no, member_address) VALUES(?,?)";
+		Addstmt = conn.prepareStatement(sql2);
+		Addstmt.setInt(1,lastKey);
+		Addstmt.setString(2,Add);
+		Addstmt.executeUpdate();
+		conn.commit();
+				
+ }catch(Exception e){
+		 	conn.rollback();
+			e.printStackTrace(); 
+	}finally{
+		// 6. 사용한 Statement 종료
+		if (memstmt != null) try { memstmt.close(); } catch(SQLException ex) {}
+		if (Addstmt != null) try { Addstmt.close(); } catch(SQLException ex) {}
+		// 7. 커넥션 종료
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}  
 %>
 </body>
 </html>
