@@ -12,8 +12,8 @@
 	request.setCharacterEncoding("utf-8");
 	String itemName = request.getParameter("itemName");
 	int itemPrice = Integer.parseInt(request.getParameter("itemPrice"));
-	int itemRate = Integer.parseInt(request.getParameter("itemRate"));
-	
+	/* int itemRate = Integer.parseInt(request.getParameter("itemRate")); */
+	double itemRate = Double.parseDouble(request.getParameter("itemRate"));
 	
 	
 	System.out.println(itemName+"<--itemName");
@@ -22,7 +22,7 @@
 	
 	
  	Connection conn = null;
- 	PreparedStatement memstmt = null;
+ 	PreparedStatement itemstmt = null;
  
  	
  try{ 
@@ -36,26 +36,21 @@
 		conn = DriverManager.getConnection(url, dbUser, dbPw);
 	
 		conn.setAutoCommit(false);
-		String sql1 = "insert into item( item_name, item_price, item_rate) values(?,?,?)"; 
-		memstmt = conn.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
-		memstmt.setString(1,itemName);
-		memstmt.setInt(2,itemPrice);
-		memstmt.setInt(3,itemRate);
-		memstmt.executeUpdate();
-		ResultSet rs = memstmt.getGeneratedKeys();
-		int lastKey = 0;
-			if(rs.next()){
-				lastKey = rs.getInt(1);
-				
-			}
-			System.out.println(lastKey);
+		String sql = "insert into item( item_name, item_price, item_rate) values(?,?,?)"; 
+		itemstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		itemstmt.setString(1,itemName);
+		itemstmt.setInt(2,itemPrice);
+		itemstmt.setDouble(3,itemRate);
+		itemstmt.executeUpdate();
+		
+		conn.commit();
  }catch(Exception e){
 	 	conn.rollback();
 		e.printStackTrace(); 
 			
  }finally{
 		// 6. 사용한 Statement 종료
-		if (memstmt != null) try { memstmt.close(); } catch(SQLException ex) {}
+		if (itemstmt != null) try { itemstmt.close(); } catch(SQLException ex) {}
 		// 7. 커넥션 종료
 		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 	}  
