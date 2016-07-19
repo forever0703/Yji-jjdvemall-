@@ -9,14 +9,14 @@
 <script>
 	$(document).ready(function(){
 		$('#Btn').click(function(){
-			 if($('#itemName').val()=="" || $('#itemName').val().length<4){
+			 if($('#itemName').val()=="" || $('#itemName').val().length<1){
 				$('#namehelper').text("상품을 입력하세요");
 				$('#itemName').focus();
 			}else if($('#itemPrice').val()==""){
 				$("#namehelper").text("");
 				$("#itemPricehelper").text("가격을 입력하세요");
 				$('#itemPrice').focus();
-			}else if($('#itemRate').val()==""){
+			}else if(isNaN($('#itemRate').val()) || $('#itemRate').val()=='' || Number($('#itemRate').val()) > 1 || Number($('#itemRate').val()) < 0){
 				$('#itemPricehelper').text("");
 				$("#itemRatehelper").text("할인 가격을 입력하세요");
 				$('#itemRate').focus();

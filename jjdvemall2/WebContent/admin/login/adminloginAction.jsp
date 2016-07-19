@@ -33,15 +33,18 @@ ResultSet rs = null;
 	String sql = "SELECT admin_id,admin_pw,admin_level FROM admin WHERE admin_id=? AND admin_pw=?";
 	pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1, adminId);
-	pstmt.setString(1, adminPw);
+	pstmt.setString(2, adminPw);
+	
+	System.out.println(pstmt);
 	
 	rs = pstmt.executeQuery();
-	System.out.println(pstmt);
+	
+	
 	
 	if(rs.next()){
 		adminLogin = true;
 		session.setAttribute("adminId", rs.getString("admin_id"));
-		session.setAttribute("adminLevel", rs.getString("admin_level"));
+		session.setAttribute("adminLevel", rs.getInt("admin_level"));
 		session.setAttribute("adminLogin", adminLogin);
 	
 		response.sendRedirect(request.getContextPath()+"/admin/adminIndex.jsp");
