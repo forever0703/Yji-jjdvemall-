@@ -36,11 +36,13 @@ table, td {border : 1px solid #000000}
 <h1>상품리스트</h1>
 <form>
 <table>
+
 	<tr>
 		<td>상품번호</td>
 		<td>이름</td>
 		<td>가격</td>
 		<td>할인률</td>
+		
 	
 	</tr>
 	<%

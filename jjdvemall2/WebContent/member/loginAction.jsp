@@ -43,7 +43,7 @@ ResultSet rs = null;
 		session.setAttribute("memberId", rs.getString("member_id"));
 		session.setAttribute("memberLogin", memberLogin);
 	
-		response.sendRedirect(request.getContextPath()+"/member/memberlogin.jsp");
+		response.sendRedirect(request.getContextPath()+"/member/memberIndex.jsp");
 	}else{
 	
 		response.sendRedirect(request.getContextPath()+"/member/memberAddform.jsp");
