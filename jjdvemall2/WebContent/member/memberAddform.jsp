@@ -68,8 +68,8 @@
 	</div>
 	<div>
 		<label>성별:</label>
-		<input class="Gender"  name="memberGender" type="radio" value="male" >남
-		<input class="Gender"  name="memberGender" type="radio" value="female">여
+		<input class="Gender"  name="memberGender" type="radio" value="남" >남 <!-- value 값을 남으로 변경 -->
+		<input class="Gender"  name="memberGender" type="radio" value="여">여 <!-- value 값을 여으로 변경 -->
 		<span id="Genhelper"></span>
 	</div>
 	<div>
