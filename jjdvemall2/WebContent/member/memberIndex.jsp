@@ -18,9 +18,9 @@
 </head>
 <body>
 	<%
-		//관리자 로그인 페이지 입니다
+		//판매자 로그인 페이지 입니다
 		
-		//관리자 로그인 정보를 확인
+		//판매자 로그인 정보를 확인
 		boolean memberLogin = false;
 		if(session.getAttribute("memberLogin") != null){
 			memberLogin = (boolean)session.getAttribute("memberLogin");
@@ -38,7 +38,7 @@
 		
 		<div>
 			<ul>
-				<li><a href="<%=request.getContextPath() %>/admin/member/memberList.jsp">회원정보 조회</a></li>
+				<li><a href="<%=request.getContextPath() %>/member/memberList1.jsp">회원정보 조회</a></li>
 				
 				<li><a href="<%=request.getContextPath() %>/admin/member/adminLogout.jsp">로그아웃</a></li>
 			</ul>
@@ -51,4 +51,4 @@
 		}
 	%>
 </body>
-</html> <!-- 박학철님 폼 참고 -->
+</html> 
