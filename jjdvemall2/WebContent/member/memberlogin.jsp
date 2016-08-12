@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<meta http-equiv="Content-Language" content="English" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
@@ -26,7 +29,13 @@ $(document).ready(function(){
 	});
 </script>
 <body>
-<h1>회원 로그인</h1>
+<%@ include file="/all/had.jsp" %>
+
+<%@ include file="/all/left.jsp" %>
+
+
+<h1>회원 로그인</h1><br>
+
 <form id="aform" action="<%=request.getContextPath() %>/member/loginAction.jsp" method="post">
 	<div>
 		<label>회원 아이디:</label>
@@ -41,6 +50,10 @@ $(document).ready(function(){
 	<div>
 		<input id="Btn" type="button" value="로그인">
 	</div>
+
+
 </form>
+
+
 </body>
 </html>
