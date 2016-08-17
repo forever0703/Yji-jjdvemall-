@@ -21,7 +21,7 @@
 	session.invalidate();
 %>
 		<div>
-			<h1>메인 화면</h1>
+			<h1> 화면</h1>
 		</div>
 		
 		
